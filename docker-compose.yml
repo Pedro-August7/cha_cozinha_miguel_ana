@@ -1,0 +1,30 @@
+services:
+  cha-de-panela:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cha_cozinha_miguel_ana
+    restart: unless-stopped
+    ports:
+      # Mapeia a porta 3030 da VPS para a porta 4000 do container Node
+      - "3030:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+    volumes:
+      # Persistência dos dados (reservas, links, presentes customizados e senha criptografada)
+      - ./data:/app/server/data
+
+    # Caso sua VPS utilize rede compartilhada com Traefik, você pode descomentar abaixo:
+    # networks:
+    #   - traefik_network
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.chapanela.rule=Host(`convite.miguel-ana.infotechti.tech`)"
+    #   - "traefik.http.routers.chapanela.entrypoints=websecure"
+    #   - "traefik.http.routers.chapanela.tls.certresolver=letsencrypt"
+    #   - "traefik.http.services.chapanela.loadbalancer.server.port=4000"
+
+# networks:
+#   traefik_network:
+#     external: true
