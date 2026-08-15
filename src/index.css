@@ -587,6 +587,41 @@ section {
   overflow-y: auto;
 }
 
+.reserve-modal-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 12px;
+  color: var(--rose-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rose-soft);
+  border-radius: 50%;
+  padding: 11px;
+}
+
+.reserve-modal-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.reserve-store-box {
+  background: rgba(193, 121, 140, 0.08);
+  border: 1px dashed var(--rose-light);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.reserve-store-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--rose-deep);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
 .modal h4 {
   color: var(--rose-deep);
   font-size: 1.6rem;

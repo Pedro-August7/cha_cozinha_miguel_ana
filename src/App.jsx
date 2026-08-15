@@ -15,7 +15,7 @@ export default function App() {
   const { reservations, reserveGift } = useReservations();
   const links = useLinks();
 
-  const [reserveTarget, setReserveTarget] = useState(null); // { id, name }
+  const [reserveTarget, setReserveTarget] = useState(null); // { id, name, iconKey }
   const [photoTarget, setPhotoTarget] = useState(null); // { id, name, iconKey }
   const [toastMessage, setToastMessage] = useState("");
   const toastTimer = useRef(null);
@@ -26,7 +26,7 @@ export default function App() {
     toastTimer.current = setTimeout(() => setToastMessage(""), 2600);
   };
 
-  const handleChoose = (id, name) => setReserveTarget({ id, name });
+  const handleChoose = (id, name, iconKey) => setReserveTarget({ id, name, iconKey });
   const handleCancelReserve = () => setReserveTarget(null);
 
   const handleConfirmReserve = async (guestName) => {
@@ -51,8 +51,23 @@ export default function App() {
       <GiftsSection catalog={catalog} reservations={reservations} onChoose={handleChoose} onOpenPhoto={handleOpenPhoto} />
       <Footer />
 
-      <ReserveModal open={Boolean(reserveTarget)} giftName={reserveTarget?.name} onCancel={handleCancelReserve} onConfirm={handleConfirmReserve} />
-      <PhotoModal open={Boolean(photoTarget)} name={photoTarget?.name} iconKey={photoTarget?.iconKey} links={photoTarget ? links[photoTarget.id] : undefined} onClose={handleClosePhoto} />
+      <ReserveModal
+        open={Boolean(reserveTarget)}
+        giftName={reserveTarget?.name}
+        iconKey={reserveTarget?.iconKey}
+        links={reserveTarget ? links[reserveTarget.id] : undefined}
+        onCancel={handleCancelReserve}
+        onConfirm={handleConfirmReserve}
+      />
+
+      <PhotoModal
+        open={Boolean(photoTarget)}
+        name={photoTarget?.name}
+        iconKey={photoTarget?.iconKey}
+        links={photoTarget ? links[photoTarget.id] : undefined}
+        onClose={handleClosePhoto}
+      />
+
       <Toast message={toastMessage} />
     </>
   );

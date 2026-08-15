@@ -24,9 +24,15 @@ export default function GiftCard({ id, name, iconKey, reservedName, onChoose, on
       />
       <div className="gift-body">
         <div className="name">{name}</div>
-        <div className={"gift-status " + (isReserved ? "taken" : "free")}>{isReserved ? "Reservado por " + reservedName : "Disponível"}</div>
-        <button className={"gift-btn" + (isReserved ? " reserved" : "")} disabled={isReserved} onClick={() => onChoose(id, name)}>
-          {isReserved ? "Reservado" : "Escolher presente"}
+        <div className={"gift-status " + (isReserved ? "taken" : "free")}>
+          {isReserved ? "Reservado por " + reservedName : "Disponível"}
+        </div>
+        <button
+          className={"gift-btn" + (isReserved ? " reserved" : "")}
+          disabled={isReserved}
+          onClick={() => onChoose(id, name, iconKey)}
+        >
+          {isReserved ? "Reservado" : "Dar este presente"}
         </button>
       </div>
     </div>
