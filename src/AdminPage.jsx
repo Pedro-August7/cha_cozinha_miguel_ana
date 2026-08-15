@@ -328,6 +328,8 @@ export default function AdminPage() {
     );
   }
 
+  const [showPassword, setShowPassword] = useState(false);
+
   if (!authed) {
     return (
       <div className="admin-gate">
@@ -335,21 +337,32 @@ export default function AdminPage() {
           <div className="script" style={{ fontSize: "2.4rem", color: "var(--rose-deep)" }}>
             Painel da Noiva
           </div>
-          <p style={{ margin: "14px 0 20px", fontSize: "0.92rem", color: "var(--ink)", opacity: 0.85 }}>
+          <p style={{ margin: "14px 0 24px", fontSize: "0.92rem", color: "var(--ink)", opacity: 0.85 }}>
             Digite o código de acesso para gerenciar os presentes reservados, adicionar novos itens e links de compra.
           </p>
 
-          <input
-            type="password"
-            placeholder="Código de acesso (ex: anaju0120)"
-            value={accessCodeInput}
-            onChange={(e) => setAccessCodeInput(e.target.value)}
-            autoFocus
-          />
+          <div className="admin-gate-input-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={accessCodeInput}
+              onChange={(e) => setAccessCodeInput(e.target.value)}
+              autoFocus
+              aria-label="Código de acesso"
+            />
+            <button
+              type="button"
+              className="admin-gate-toggle-pwd"
+              onClick={() => setShowPassword(!showPassword)}
+              title={showPassword ? "Ocultar código" : "Mostrar código"}
+              tabIndex={-1}
+            >
+              {showPassword ? "👁️" : "🔒"}
+            </button>
+          </div>
 
-          {loginError && <div className="modal-error">{loginError}</div>}
+          {loginError && <div className="modal-error" style={{ marginBottom: 16 }}>{loginError}</div>}
 
-          <button type="submit" className="admin-save" style={{ width: "100%", padding: "12px" }} disabled={checking}>
+          <button type="submit" className="admin-save admin-gate-submit-btn" disabled={checking}>
             {checking ? "Verificando..." : "Entrar no Painel"}
           </button>
 
