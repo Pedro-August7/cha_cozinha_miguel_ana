@@ -68,6 +68,7 @@ export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
   const [checking, setChecking] = useState(true);
   const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Abas
   const [activeTab, setActiveTab] = useState("reservations"); // 'reservations' | 'links'
@@ -327,8 +328,6 @@ export default function AdminPage() {
       </div>
     );
   }
-
-  const [showPassword, setShowPassword] = useState(false);
 
   if (!authed) {
     return (
